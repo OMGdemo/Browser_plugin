@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>页面背景变色器</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 300px;
+            padding: 20px;
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            background: #f5f5f5;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .color-picker-container {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-size: 14px;
+        }
+
+        input[type="color"] {
+            width: 100%;
+            height: 50px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            background: white;
+        }
+
+        .preset-colors {
+            margin-bottom: 15px;
+        }
+
+        .preset-colors label {
+            margin-bottom: 10px;
+        }
+
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+        }
+
+        .color-btn {
+            width: 100%;
+            aspect-ratio: 1;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .color-btn:hover {
+            transform: scale(1.1);
+            border-color: #999;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        button {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        #applyBtn {
+            background: #4CAF50;
+            color: white;
+        }
+
+        #applyBtn:hover {
+            background: #45a049;
+        }
+
+        #resetBtn {
+            background: #f44336;
+            color: white;
+        }
+
+        #resetBtn:hover {
+            background: #da190b;
+        }
+
+        .status {
+            margin-top: 10px;
+            padding: 8px;
+            border-radius: 4px;
+            text-align: center;
+            font-size: 12px;
+            display: none;
+        }
+
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            display: block;
+        }
+
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <h2>🎨 页面颜色自定义器</h2>
+    
+    <div class="color-picker-container">
+        <label for="bgColorPicker">背景颜色：</label>
+        <input type="color" id="bgColorPicker" value="#ffffff">
+    </div>
+
+    <div class="color-picker-container">
+        <label for="textColorPicker">文本颜色：</label>
+        <input type="color" id="textColorPicker" value="#000000">
+    </div>
+
+    <div class="preset-colors">
+        <label>预设背景色：</label>
+        <div class="color-grid" id="bgColorGrid">
+            <div class="color-btn" style="background: #ffffff; border-color: #ccc;" data-color="#ffffff"></div>
+            <div class="color-btn" style="background: #f0f0f0; border-color: #ccc;" data-color="#f0f0f0"></div>
+            <div class="color-btn" style="background: #fff9e6;" data-color="#fff9e6"></div>
+            <div class="color-btn" style="background: #e6f7ff;" data-color="#e6f7ff"></div>
+            <div class="color-btn" style="background: #f0fff0;" data-color="#f0fff0"></div>
+            <div class="color-btn" style="background: #ffe6e6;" data-color="#ffe6e6"></div>
+            <div class="color-btn" style="background: #f5e6ff;" data-color="#f5e6ff"></div>
+            <div class="color-btn" style="background: #fff0e6;" data-color="#fff0e6"></div>
+            <div class="color-btn" style="background: #e6fff0;" data-color="#e6fff0"></div>
+            <div class="color-btn" style="background: #000000;" data-color="#000000"></div>
+        </div>
+    </div>
+
+    <div class="preset-colors">
+        <label>预设文本色：</label>
+        <div class="color-grid" id="textColorGrid">
+            <div class="color-btn" style="background: #000000;" data-color="#000000"></div>
+            <div class="color-btn" style="background: #333333;" data-color="#333333"></div>
+            <div class="color-btn" style="background: #666666;" data-color="#666666"></div>
+            <div class="color-btn" style="background: #999999;" data-color="#999999"></div>
+            <div class="color-btn" style="background: #ffffff; border-color: #ccc;" data-color="#ffffff"></div>
+            <div class="color-btn" style="background: #ff0000;" data-color="#ff0000"></div>
+            <div class="color-btn" style="background: #0000ff;" data-color="#0000ff"></div>
+            <div class="color-btn" style="background: #00aa00;" data-color="#00aa00"></div>
+            <div class="color-btn" style="background: #ff6600;" data-color="#ff6600"></div>
+            <div class="color-btn" style="background: #9900cc;" data-color="#9900cc"></div>
+        </div>
+    </div>
+
+    <div class="button-group">
+        <button id="applyBtn">应用颜色</button>
+        <button id="resetBtn">恢复默认</button>
+    </div>
+
+    <div id="status" class="status"></div>
+
+    <script src="popup.js"></script>
+</body>
+</html>
